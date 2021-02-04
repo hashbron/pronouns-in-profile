@@ -15,7 +15,7 @@ function changeText(bio) {
   
   	// Search bio text for pronouns using regex
 	var bioText = bio.textContent;
-	let re = /\(*(He|She|They|he|she|they) *(\/|\||\,) *(Him|Él|èl|Her|Them|They|him|her|ella|Ella|them|they)( *(\/|\||\,) *(His|Hers|Theirs|his|hers|theirs|Él|èl|))*\)*\.*\,*/;
+	let re = /\(*(He|She|They|he|she|they) *(\/|\||\,) *(Him|Él|èl|Her|Them|They|him|her|ella|Ella|them|they)( *(\/|\||\,) *(His|Hers|Theirs|his|hers|theirs|Él|èl|))*\)*\.*\,*/g;
 	var pronounArray = re.exec(bioText);
 	
 	// If pronouns are found in the bio
@@ -27,24 +27,59 @@ function changeText(bio) {
 		// Create a text node with the pronoun text
 		var textnode = document.createTextNode(trim);  
 
+		// Get div of profile elements
+		var profileElementList = document.querySelector(PROFILE_ELEMENTS_LIST_SELECTOR);
+
 		// Create new pronoun element from class list of first element in the profile
-		var classList = document.querySelector(PROFILE_ELEMENTS_LIST_SELECTOR).firstChild.classList;
+		var classList = profileElementList.firstChild.classList;
 		var pronounElement = document.createElement("span");
 		pronounElement.className = classList;
 
 		// Create an icon element
-		var icon = document.querySelector(PROFILE_ELEMENTS_LIST_SELECTOR).firstChild.firstChild.cloneNode(); 
-
+		var icon = profileElementList.firstChild.firstChild.cloneNode(); 
 		icon.innerHTML = PRONOUN_ICON_HTML;
 
 		// Construct complete pronoun element by adding children
 		pronounElement.appendChild(icon);
 		pronounElement.appendChild(textnode); 
 
-		// Get profile element flex div and append pronoun element to it
-		var profileElementList = document.querySelector(PROFILE_ELEMENTS_LIST_SELECTOR);
+		// Append pronoun element to profile
 		profileElementList.appendChild(pronounElement);
+
+		this.editBio(bio, pronouns, re.lastIndex);
 	}
+}
+
+function editBio(bio, pronouns, lastIndex) {
+
+	var node = this.findChild(bio, pronouns);
+	var nodeText = node.textContent;
+	var index = nodeText.indexOf(pronouns);
+
+	var precedingText = nodeText.substring(0, index);
+	var followingText = nodeText.substring(index + pronouns.length);
+
+	node.innerHTML = precedingText + followingText;
+	
+
+}
+
+function findChild(node, pronouns) {
+	// Base case, only child is text node
+	if (node.firstChild.nodeType == Node.TEXT_NODE) {
+		return node;
+	}
+	
+	// Recursive step, search through children to find text containing pronouns
+	var children = node.children;
+
+	for (var i = 0; i < children.length; i++) { // Iterate over children
+  		if (children[i].textContent.includes(pronouns)) {
+  			return findChild(children[i], pronouns);
+  		}
+	}
+
+	return null; // should not get here
 }
 
 /*
