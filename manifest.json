@@ -22,7 +22,7 @@
                         "https://twitter.com/home",
                         "https://twitter.com/notifications",
                         "https://twitter.com/*/status/*/*",
-                        "https://twitter.com/*/followers_you_follow"],
+                        "https://twitter.com/*/*"],
      "js": ["global.js", 
             "add-pronoun.js"],
      "run_at": "document_start"
