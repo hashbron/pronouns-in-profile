@@ -2,7 +2,7 @@ var title = document.getElementsByTagName("title")[0];
 
 // Check that the page title has a "@" to confirm it is a user profile page
 // This distinguishes from pages like "twitter.com/home" and "twitter.com/notifcations"
-if (title.textContent.includes("@")){ 
+if (title && title.textContent.includes("@")){ 
 
 	waitForElm(PROFILE_ELEMENTS_LIST_SELECTOR).then( // Wait for profile to load
 		elm => {

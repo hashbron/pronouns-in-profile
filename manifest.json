@@ -11,8 +11,7 @@
     "persistent": false
   },
 
-  "permissions": ["webNavigation", 
-                  "tabs",
+  "permissions": ["tabs",
                   "https://twitter.com/*"],  
 
   "content_scripts": [
