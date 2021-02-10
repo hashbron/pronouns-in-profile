@@ -31,7 +31,9 @@ function changeText(bio) {
 		var profileElementList = document.querySelector(PROFILE_ELEMENTS_LIST_SELECTOR);
 
 		// Create new pronoun element from class list of first element in the profile
-		var classList = profileElementList.firstChild.classList;
+		// !! Add code here to get second element iff first element is a link (this will homogenize formatting)
+		// !! The calendar element garuntees there is always at least one element and one non-link element
+		var classList = profileElementList.firstChild.classList; 
 		var pronounElement = document.createElement("span");
 		pronounElement.className = classList;
 
