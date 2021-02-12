@@ -3,9 +3,14 @@
 
 The goal of this extension is pretty simple - it's something Twitter could easily implement (and they should!). I think having a dedicated pronoun field helps to normalize inclusivity (and saves you some characters in your bio).
 
-The extension works by scanning the text of every Twitter bio you visit and using an annoyingly long regular expression to find any pronouns. If they are found the extension removes them from the bio and creates a new HTML element in the profile next to the location, link, and birthday fields. 
+#### How it works
+The extension works by scanning the text of every Twitter bio you visit and using an annoyingly long regular expression to find any pronouns. If pronouns are found the extension removes them from the bio and creates a new HTML element in the profile next to the location, link, and birthday fields. 
 
-The icon used for the pronoun field (a smiley face) is consistent with Twitter style and design because is the same icon used for emojis when composing a tweet.
+The regex used can be found in ![this file](https://github.com/hashbron/pronouns-in-profile/blob/39116bfa5dba31d2032574f76a3372b2e9b3d1c4/global.js#L18) along with the code for creating a new profile element and editing a user's profile. The infrastrucutre to execute this code when new pages are loaded is housed ![here](https://github.com/hashbron/pronouns-in-profile/blob/main/background.js) and ![here](https://github.com/hashbron/pronouns-in-profile/blob/main/add-pronoun.js).
+
+#### Design
+
+The icon used and text used for the new pronoun field (a smiley face) are consistent with Twitter style. The icon is the same icon used for emojis when composing a tweet and the text formatting and CSS are copies of other profile elements.
 
 Here are a few examples of the extension in action:
 
