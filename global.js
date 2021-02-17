@@ -15,17 +15,32 @@ function changeText(bio) {
   
   	// Search bio text for pronouns using regex
 	var bioText = bio.textContent;
-	let re = /\(*(He|She|They|he|she|they) *(\/|\||\,) *(Him|Él|èl|Her|Them|They|him|her|ella|Ella|them|they)( *(\/|\||\,) *(His|Hers|Theirs|his|hers|theirs|Él|èl|))*\)*\.*\,*/g;
-	var pronounArray = re.exec(bioText);
+	let re = /((she|they|him|hers|her|he|them|his|theirs|ella|èl|el|any|all)( |)(\/|\,|\&|\||)( |))+/ig;	
+
+	// Get an array of all regex matches
+	var pronounArray = bioText.match(re);
+
+	alert(pronounArray);
 	
 	// If pronouns are found in the bio
 	if (pronounArray != null) {
 
-		// Extract pronouns and trim 
-		pronouns = pronounArray[0];
-		var trim = pronouns.replace(/\||\,|\.|\(|\)/g, "");
+		// Get longest array element
+		var longest = pronounArray.reduce(
+		    function (a, b) {
+		        return a.length > b.length ? a : b;
+		    	}
+			);
+
+		alert(longest);
+		var pronouns = longest.replace(/(\/|\,|\&|\|)(\ |)$/, "");
+
+		alert(pronouns);
+
+		//alert(trim);
+
 		// Create a text node with the pronoun text
-		var textnode = document.createTextNode(trim);  
+		var textnode = document.createTextNode(pronouns);  
 
 		// Get div of profile elements
 		var profileElementList = document.querySelector(PROFILE_ELEMENTS_LIST_SELECTOR);
