@@ -15,12 +15,10 @@ function changeText(bio) {
   
   	// Search bio text for pronouns using regex
 	var bioText = bio.textContent;
-	let re = /((she|they|him|hers|her|he|them|his|theirs|ella|èl|el|any|all)( |)(\/|\,|\&|\||)( |))+/ig;	
+	let re = /((she|they|him|hers|her|he|them|his|theirs|ella|èl|el|Él|any|all|dude|bro)( |)(\/|\,|\&|\||)( |)){2,}/ig;	
 
 	// Get an array of all regex matches
 	var pronounArray = bioText.match(re);
-
-	alert(pronounArray);
 	
 	// If pronouns are found in the bio
 	if (pronounArray != null) {
@@ -32,12 +30,7 @@ function changeText(bio) {
 		    	}
 			);
 
-		alert(longest);
 		var pronouns = longest.replace(/(\/|\,|\&|\|)(\ |)$/, "");
-
-		alert(pronouns);
-
-		//alert(trim);
 
 		// Create a text node with the pronoun text
 		var textnode = document.createTextNode(pronouns);  
@@ -76,8 +69,27 @@ function editBio(bio, pronouns, lastIndex) {
 	var precedingText = nodeText.substring(0, index);
 	var followingText = nodeText.substring(index + pronouns.length);
 
+	// Remove parenthesis or brackets
+	followingText = followingText.replace(/^(\)|\])/g, "");
+	precedingText = precedingText.replace(/(\(|\[])$/g, "");
+
+	// Remove any puncutration or spacing
+	let followingRe = /^(\ |)*(\/|\,|\&|\||\.|\!)*(\ |)*/g;
+	let precedingRe = /(\ |)*(\/|\,|\&|\||\.|\!)*(\ |)*$/g;
+
+	var followingArray = followingText.match(followingRe);
+	var precedingArray = precedingText.match(precedingRe);
+
+	// Check after the pronouns for following punctuation
+	if (followingArray != null && followingText != "") {
+		followingText = followingText.replace(followingRe, "");
+	}
+	// If none is found, check before the pronouns for punctuation
+	else if (precedingArray != null && precedingText != "") {
+		precedingText = precedingText.replace(precedingRe, "");
+	}
+
 	node.innerHTML = precedingText + followingText;
-	
 
 }
 
