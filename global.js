@@ -38,10 +38,21 @@ function changeText(bio) {
 		// Get div of profile elements
 		var profileElementList = document.querySelector(PROFILE_ELEMENTS_LIST_SELECTOR);
 
-		// Create new pronoun element from class list of first element in the profile
-		// !! Add code here to get second element iff first element is a link (this will homogenize formatting)
-		// !! The calendar element garuntees there is always at least one element and one non-link element
-		var classList = profileElementList.firstChild.classList; 
+
+
+		// Get a lookalike class list from the elements in the profule
+		var classList;
+
+		// If first element is a link get the second element
+		if (profileElementList.firstChild.tagName == 'A') { 
+			classList = profileElementList.children[1].classList;
+		} 
+		// Otherwise use first element
+		else { 
+			classList = profileElementList.firstChild.classList; 
+		}
+
+		// Create new pronoun element from class list 
 		var pronounElement = document.createElement("span");
 		pronounElement.className = classList;
 
