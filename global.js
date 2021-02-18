@@ -60,6 +60,11 @@ function changeText(bio) {
 	}
 }
 
+
+// This function controls the capitalization of the pronouns added to a pronoun element
+// The current capitalization scheme is as follows
+// 		1) If the first letter is the only letter capilized, then we lowercase all letters
+//		2) For any other capitalization scheme we preserve the choices of the user
 function adjustCapitalization(pronouns) {
 	// If first character is lowercase
 	if (pronouns.charAt(0) != pronouns.charAt(0).toUpperCase()) {
