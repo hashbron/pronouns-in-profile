@@ -33,7 +33,7 @@ function changeText(bio) {
 		var pronouns = longest.replace(/(\/|\,|\&|\|)(\ |)$/, "");
 
 		// Create a text node with the pronoun text
-		var textnode = document.createTextNode(pronouns);  
+		var textnode = document.createTextNode(adjustCapitalization(pronouns));  
 
 		// Get div of profile elements
 		var profileElementList = document.querySelector(PROFILE_ELEMENTS_LIST_SELECTOR);
@@ -58,6 +58,20 @@ function changeText(bio) {
 
 		this.editBio(bio, pronouns, re.lastIndex);
 	}
+}
+
+function adjustCapitalization(pronouns) {
+	// If first character is lowercase
+	if (pronouns.charAt(0) != pronouns.charAt(0).toUpperCase()) {
+		return pronouns;
+	}
+	for (var i = 1; i < pronouns.length; i++) {
+		// If another character is capital and a letter
+	    if (pronouns.charAt(i) == pronouns.charAt(i).toUpperCase() && pronouns.charAt(i).match(/[a-z]/i)) {
+	    	return pronouns;
+	    }
+	}
+	return pronouns.toLowerCase();
 }
 
 function editBio(bio, pronouns, lastIndex) {
