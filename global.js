@@ -15,17 +15,25 @@ function changeText(bio) {
   
   	// Search bio text for pronouns using regex
 	var bioText = bio.textContent;
-	let re = /\(*(He|She|They|he|she|they) *(\/|\||\,) *(Him|Él|èl|Her|Them|They|him|her|ella|Ella|them|they)( *(\/|\||\,) *(His|Hers|Theirs|his|hers|theirs|Él|èl|))*\)*\.*\,*/g;
-	var pronounArray = re.exec(bioText);
+	let re = /((she|they|him|hers|her|he|them|his|theirs|ella|èl|el|Él|any|all|dude|bro)( |)(\/|\,|\&|\||)( |)){2,}/ig;	
+
+	// Get an array of all regex matches
+	var pronounArray = bioText.match(re);
 	
 	// If pronouns are found in the bio
 	if (pronounArray != null) {
 
-		// Extract pronouns and trim 
-		pronouns = pronounArray[0];
-		var trim = pronouns.replace(/\||\,|\.|\(|\)/g, "");
+		// Get longest array element
+		var longest = pronounArray.reduce(
+		    function (a, b) {
+		        return a.length > b.length ? a : b;
+		    	}
+			);
+
+		var pronouns = longest.replace(/(\/|\,|\&|\|)(\ |)$/, "");
+
 		// Create a text node with the pronoun text
-		var textnode = document.createTextNode(trim);  
+		var textnode = document.createTextNode(adjustCapitalization(pronouns));  
 
 		// Get div of profile elements
 		var profileElementList = document.querySelector(PROFILE_ELEMENTS_LIST_SELECTOR);
@@ -52,6 +60,25 @@ function changeText(bio) {
 	}
 }
 
+
+// This function controls the capitalization of the pronouns added to a pronoun element
+// The current capitalization scheme is as follows
+// 		1) If the first letter is the only letter capilized, then we lowercase all letters
+//		2) For any other capitalization scheme we preserve the choices of the user
+function adjustCapitalization(pronouns) {
+	// If first character is lowercase
+	if (pronouns.charAt(0) != pronouns.charAt(0).toUpperCase()) {
+		return pronouns;
+	}
+	for (var i = 1; i < pronouns.length; i++) {
+		// If another character is capital and a letter
+	    if (pronouns.charAt(i) == pronouns.charAt(i).toUpperCase() && pronouns.charAt(i).match(/[a-z]/i)) {
+	    	return pronouns;
+	    }
+	}
+	return pronouns.toLowerCase();
+}
+
 function editBio(bio, pronouns, lastIndex) {
 
 	var node = this.findChild(bio, pronouns);
@@ -61,8 +88,27 @@ function editBio(bio, pronouns, lastIndex) {
 	var precedingText = nodeText.substring(0, index);
 	var followingText = nodeText.substring(index + pronouns.length);
 
+	// Remove parenthesis or brackets
+	followingText = followingText.replace(/^(\)|\])/g, "");
+	precedingText = precedingText.replace(/(\(|\[])$/g, "");
+
+	// Remove any puncutration or spacing
+	let followingRe = /^(\ |)*(\/|\,|\&|\||\.|\!)*(\ |)*/g;
+	let precedingRe = /(\ |)*(\/|\,|\&|\||\.|\!)*(\ |)*$/g;
+
+	var followingArray = followingText.match(followingRe);
+	var precedingArray = precedingText.match(precedingRe);
+
+	// Check after the pronouns for following punctuation
+	if (followingArray != null && followingText != "") {
+		followingText = followingText.replace(followingRe, "");
+	}
+	// If none is found, check before the pronouns for punctuation
+	else if (precedingArray != null && precedingText != "") {
+		precedingText = precedingText.replace(precedingRe, "");
+	}
+
 	node.innerHTML = precedingText + followingText;
-	
 
 }
 
