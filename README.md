@@ -18,3 +18,4 @@ Here are a few examples of the extension in action:
 ![ewarren](https://github.com/hashbron/pronouns-in-profile/blob/main/screenshots/ewarren.png)
 ![juliancastro](https://github.com/hashbron/pronouns-in-profile/blob/main/screenshots/Screen%20Shot%202021-02-04%20at%2011.59.20%20PM.png)
 ![aoc](https://github.com/hashbron/pronouns-in-profile/blob/main/screenshots/aoc.png)
+![ayanna](https://github.com/hashbron/pronouns-in-profile/blob/main/screenshots/ayanna.png)
