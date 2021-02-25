@@ -15,6 +15,6 @@ The icon used and text used for the new pronoun field (a smiley face) are consis
 
 Here are a few examples of the extension in action:
 
-![ewarren](https://github.com/hashbron/pronouns-in-profile/blob/main/screenshots/Screen%20Shot%202021-02-04%20at%2011.58.38%20PM.png)
+![ewarren](https://github.com/hashbron/pronouns-in-profile/blob/main/screenshots/ewarren.png)
 ![juliancastro](https://github.com/hashbron/pronouns-in-profile/blob/main/screenshots/Screen%20Shot%202021-02-04%20at%2011.59.20%20PM.png)
-![aoc](https://github.com/hashbron/pronouns-in-profile/blob/main/screenshots/Screen%20Shot%202021-02-04%20at%2011.59.34%20PM.png)
+![aoc](https://github.com/hashbron/pronouns-in-profile/blob/main/screenshots/aoc.png)
