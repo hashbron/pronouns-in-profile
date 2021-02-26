@@ -1,7 +1,7 @@
 {
   "name": "Pronouns in Profile",
   "description": "A little extension that adds Twitter users' pronouns to their profiles.",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "manifest_version": 2,
 
   "background": {
