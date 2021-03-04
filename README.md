@@ -1,6 +1,7 @@
 # pronouns-in-profile
 ### A Chrome extension to take a user's pronoun's from their bio and them to their profile on Twitter.
-#### Available on the ![Chrome Web Store](https://chrome.google.com/webstore/detail/pronouns-in-profile/glamhpccofagaiogibiannnbomhjdojp/)! Available as a ![Firefox Add On](https://addons.mozilla.org/en-US/firefox/addon/pronouns-in-profile/)!
+#### Available on the ![Chrome Web Store](https://chrome.google.com/webstore/detail/pronouns-in-profile/glamhpccofagaiogibiannnbomhjdojp/)! 
+#### Available as a ![Firefox Add On](https://addons.mozilla.org/en-US/firefox/addon/pronouns-in-profile/)!
 
 The goal of this extension is pretty simple - it's something Twitter could easily implement (and they should!). I think having a dedicated pronoun field helps to normalize inclusivity (and saves you some characters in your bio).
 
